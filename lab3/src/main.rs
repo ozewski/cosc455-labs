@@ -102,6 +102,45 @@ fn main() {
 
     average();
 
+    // CHAPTER 3
+
+    // arrays
+
+    // fixed length
+    let mut letters = ['a', 'b', 'c'];
+    letters[0] = 'x';
+    println!("first letter is {}", letters[0]);
+
+    let numbers: [i32; 5];
+    // println!("fourth number is {}", letters[4]);
+    // this will not work
+
+    numbers = [0; 5]; // repeat expression
+    println!("length is {}", letters.len());
+    // len is of type usize
+
+    // multi-dimensional arrays
+
+    let parking_lot = [[1, 2, 3], [4, 5, 6], [9; 3]];
+    let garage: [[[u64; 100]; 20]; 5];
+
+    // tuples
+
+    // can be mixed data types
+    // ordered
+    // fixed length
+    // data types must be known at compile time
+
+    let mut stuff = (10, 3.14, 'x');
+    println!("first item is {}", stuff.0); // different syntax from arrays
+    stuff.0 += 3;
+    println!("first item is {}", stuff.0);
+
+    // destructuring
+    let (stufffirst, stuffsecond, stuffthird) = stuff;
+
+    // CHAPTER 4
+
 }
 
 fn average() {
