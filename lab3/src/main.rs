@@ -1,16 +1,65 @@
 // Chapters 1-5 of the linkedin learning course to learn Rust
+// My answers to the challenges are in functions at the top.
+// The main method consists of my code notes following along with the videos.
 
-// add comments using double forward slash
-/* 
-java-like 
-multi-line comments 
-*/
+fn min_max_mean() {
+    let numbers = [1, 9, -2, 0, 23, 20, -7, 13, 37, 20, 56, -18, 20, 3];
+    let mut max: i32 = 0;
+    let mut min: i32 = 0;
+    let mut mean = 0.0;
+
+    for number in numbers {
+        mean += number as f64;
+        if number > max {
+            max = number;
+        }
+        if number < min {
+            min = number;
+        }
+    }
+
+    mean /= numbers.len() as f64;
+
+    assert_eq!(max, 56);
+    assert_eq!(min, -18);
+    assert_eq!(mean, 12.5);
+    println!("Tests passed!");
+}
+
+fn average() {
+    let a = 13;
+    let b = 2.3;
+    let c: f32 = 120.0;
+
+    let average = (a as f64 + b + c as f64) / 3.0;
+
+    assert_eq!(average, 45.1);
+    println!("Test passed!");
+}
+
+fn temperature_challenge() {
+    fn celsius_to_fahrenheit(celsius: f64) -> f64 {
+        (1.8 * celsius) + 32.0
+    }
+
+    let celsius_temp = 23.0;
+    let fahrenheit_temp = celsius_to_fahrenheit(celsius_temp);
+
+    assert_eq!(fahrenheit_temp, 73.4);
+    println!("Test passed!");
+}
 
 fn main() {
     // CHAPTER 1
 
   println!("Hello, world!"); // indentation doesn't matter: "free-form" language
     println!("Hello, world!");
+
+    // add comments using double forward slash
+    /* 
+    java-like 
+    multi-line comments 
+    */
 
     // CHAPTER 2
 
@@ -175,27 +224,140 @@ fn main() {
 
     temperature_challenge();
 
-}
+    // CHAPTER 5
 
-fn average() {
-    let a = 13;
-    let b = 2.3;
-    let c: f32 = 120.0;
+    // conditional execution
 
-    let average = (a as f64 + b + c as f64) / 3.0;
+    let x = 3;
 
-    assert_eq!(average, 45.1);
-    println!("Test passed!");
-}
-
-fn temperature_challenge() {
-    fn celsius_to_fahrenheit(celsius: f64) -> f64 {
-        (1.8 * celsius) + 32.0
+    if x == 3 {
+        println!("x is 3!");
     }
 
-    let celsius_temp = 23.0;
-    let fahrenheit_temp = celsius_to_fahrenheit(celsius_temp);
+    let x = 4;
 
-    assert_eq!(fahrenheit_temp, 73.4);
-    println!("Test passed!");
+    if x == 3 {
+        println!("x is 3!");
+        // will never run
+    }
+
+    /*
+    if x {
+        // will not compile, since x is an int, not a bool
+    }
+    */
+
+    // multiple conditions
+
+    let x = 3;
+    let y = 5;
+
+    if x > y {
+        println!("x is greater than y");
+    } else if x == y {
+        println!("x is equal to y");
+    } else {
+        println!("x is NOT greater than y");
+    }
+
+    // conditional assignment
+
+    let make_x_odd = true;
+    let x;
+
+    if make_x_odd {
+        x = 1;
+    } else {
+        // see error upon reference
+        // x = 2;
+    }
+
+    // println!("x is {x}");
+    // will throw possibly uninitialized error since else assignment is commented out
+
+    let x = if make_x_odd {1} else {2};
+    // more compact conditional assignment syntax
+    
+    // let x = if make_x_odd {1} else {2.0};
+    // will not work because data types of if and else are different
+
+    // loops
+
+    let mut count = 0;
+
+    loop {
+        count += 1;
+        println!("count is {count}");
+
+        if count == 10 {
+            break
+        }
+    };
+
+    println!("outside the loop");
+
+    let mut count = 0;
+
+    let result = loop {
+        count += 1;
+        println!("count is {count}");
+
+        if count == 10 {
+            break count * 10;
+        }
+    }; // semicolon required now that it is a statement
+
+    // while loops
+
+    let mut count = 0;
+
+    while count < 10 {
+        count += 1;
+        println!("count is {count}");
+        // while loop cannot use break to return a value
+    }
+
+    // for loops
+
+    let message = ['h', 'e', 'l', 'l', 'o'];
+
+    for item in message {
+        println!("item is {item}");
+        // creates an iterator under the hood
+    }
+
+    for (i, item) in message.iter().enumerate() {
+        println!("item is {item}, index {i}");
+    }
+
+    // ranges
+    for number in 0..5 {
+        // prints 0 through 4 inclusive
+        println!("number is {number}")
+    }
+
+    // nested loops
+    let mut matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
+
+    for row in matrix {
+        for num in row {
+            print!("{num} ");
+            // print numbers in row on the same line
+        }
+        println!(); // insert new line
+    }
+
+    for row in matrix.iter_mut() {
+        for num in row.iter_mut() {
+            *num += 10;
+        }
+        println!(); // insert new line
+    }
+
+    min_max_mean();
+
 }
