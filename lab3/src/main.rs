@@ -141,6 +141,40 @@ fn main() {
 
     // CHAPTER 4
 
+    // function parameters
+
+    fn say_the_sum(a: u8, b: u8) { // a, b are variables, i8 is type
+        println!("sum is {}", a + b);
+    }
+
+    say_the_sum(13, 15);
+    say_the_sum(14, 15);
+    say_the_sum(15, 15);
+
+    let x = 5;
+    say_the_sum(12, x);
+    // this lets compiler infer x as u8
+
+    // function return values
+
+    fn square(x: i32) -> i32 {
+        println!("squaring {x}");
+        x * x
+        // no semicolon on last line of function makes rust treat it as return value
+    }
+
+    let squared = square(8);
+    println!("result: {squared}");
+
+    fn square2(x: i32) -> (i32, i32) {
+        println!("squaring {x}");
+        (x, x * x) // tuple return value
+    }
+
+    // unit data type: default data type
+
+    temperature_challenge();
+
 }
 
 fn average() {
@@ -151,5 +185,17 @@ fn average() {
     let average = (a as f64 + b + c as f64) / 3.0;
 
     assert_eq!(average, 45.1);
+    println!("Test passed!");
+}
+
+fn temperature_challenge() {
+    fn celsius_to_fahrenheit(celsius: f64) -> f64 {
+        (1.8 * celsius) + 32.0
+    }
+
+    let celsius_temp = 23.0;
+    let fahrenheit_temp = celsius_to_fahrenheit(celsius_temp);
+
+    assert_eq!(fahrenheit_temp, 73.4);
     println!("Test passed!");
 }
