@@ -79,4 +79,38 @@ fn main() {
 
     // boolean data type and operations
 
+    // this is all just stuff from discrete math and 290, I don't need to write it out
+    // double pipe and double and operators are short-circuiting
+
+    println!("{}", (true && true) || panic!());
+    // panic never runs because of short circuit
+
+    // comparison operators
+
+    // same as python/java
+    // cannot compare objects of different data types (generally)
+
+    // char data types
+
+    // stores using 4 bytes
+    // use single quotes
+
+    let letter = 'a';
+    let number = '1';
+    let finger = '\u{261D}';
+    println!("{}\n{}\n{}", letter, number, finger);
+
+    average();
+
+}
+
+fn average() {
+    let a = 13;
+    let b = 2.3;
+    let c: f32 = 120.0;
+
+    let average = (a as f64 + b + c as f64) / 3.0;
+
+    assert_eq!(average, 45.1);
+    println!("Test passed!");
 }
